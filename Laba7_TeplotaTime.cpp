@@ -68,6 +68,23 @@ int main(int argc, char **argv)
 		TT[0][i] = T2;
 	}
 
+	for (i = 0; i < NXB; i++)
+	{
+		for (j = 0; j < NYB * 2; j++)
+		{
+			T[j][i] = 0;
+			TT[j][i] = 0;
+		}
+	}
+	for (i = NXB; i < NXB * 2; i++)
+	{
+		for (j = 0; j < NYB; j++)
+		{
+			T[j][i] = 0;
+			TT[j][i] = 0;
+		}
+	}
+
 
 	ofstream fout("c:/work/T1.dat", ios_base::out | ios_base::trunc | ios_base::binary);
 	for (j = 0; j <= NY; j++) 
@@ -143,7 +160,6 @@ int main(int argc, char **argv)
 				//CDJI
 				else if (NXB * 2 < i && i < NX && 0 < j && j < NY)
 					TT[j][i] = t0 - bet_1 * (alf_1*T[j - 1][i] + alf_2 * T[j][i - 1] + alf_2 * T[j][i + 1] + alf_1 * T[j + 1][i] + gam_1 * t0);
-
 			}
 		}
 
@@ -181,12 +197,4 @@ int main(int argc, char **argv)
 	fou.write((char*)&n_y, sizeof n_y);
 	fou.write((char*)&n_k, sizeof n_y);
 	fou.close();
-	for (j = 0; j <= 5; j++)
-	{
-		for (i = 0; i <= 4; i++)
-		{
-			cout <<setw (20)<< T[j][i];
-		}
-		cout << endl;
-	}
 }
